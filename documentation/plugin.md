@@ -4,7 +4,8 @@
 
 ## Overview
 
-This is a sample plugin demonstrating an API call action. It fetches data from a time API endpoint.
+This plugin exposes the PIV Adapter API, a REST interface for sending requests for uittreksels, a
+binnengemeentelijke verhuizing or a buitengemeentelijke verhuizing to PIV.
 
 ## Dependencies
 
@@ -12,7 +13,7 @@ This is a sample plugin demonstrating an API call action. It fetches data from a
 
 ```kotlin
 dependencies {
-    implementation("com.ritense.valtimoplugins:sample-plugin:0.0.1")
+    implementation("com.ritense.valtimoplugins:piv-adapter-plugin:0.0.1")
 }
 ```
 
@@ -21,7 +22,7 @@ dependencies {
 ```json
 {
   "dependencies": {
-    "@valtimo-plugins/sample-plugin": "0.0.1"
+    "@valtimo-plugins/piv-adapter-plugin": "0.0.1"
   }
 }
 ```
@@ -30,18 +31,18 @@ In your `app.module.ts`:
 
 ```typescript
 import {
-    SamplePluginModule, samplePluginSpecification,
-} from '@valtimo-plugins/sample-plugin';
+    PivAdapterPluginModule, pivAdapterPluginSpecification,
+} from '@valtimo-plugins/piv-adapter-plugin';
 
 @NgModule({
     imports: [
-        SamplePluginModule,
+        PivAdapterPluginModule,
     ],
     providers: [
         {
             provide: PLUGIN_TOKEN,
             useValue: [
-                samplePluginSpecification,
+                pivAdapterPluginSpecification,
             ]
         }
     ]
@@ -52,19 +53,28 @@ import {
 
 List the plugin configuration properties and how to set them.
 
-| Property | Type   | Required | Description                          |
-|----------|--------|----------|--------------------------------------|
-| apiUrl   | string | Yes      | The URL of the time API to call      |
+| Property          | Type   | Required | Description                                                                              |
+|-------------------|--------|----------|------------------------------------------------------------------------------------------|
+| pivAdapterBaseUrl | string | Yes      | Base URL of the PIV Adapter API, including its servlet path, e.g. `https://piv.example.nl/esuite/pivadapter` |
 
 ## Actions
 
-### Time API test action
+Each action maps onto one endpoint of `piv-adapter-openapi.yaml`.
 
-Sends a GET request to the configured API URL and returns the timezone response.
+| Action key                     | Endpoint                        | Description                                       |
+|--------------------------------|---------------------------------|---------------------------------------------------|
+| `piv-uittreksel-aanvraag`      | `POST /v1/uittrekselAanvraag`   | Requests one or more uittreksels                  |
+| `piv-binnen-verhuis-aanvraag`  | `POST /v1/binnenVerhuisAanvraag`| Reports a move within the same municipality       |
+| `piv-buiten-verhuis-aanvraag`  | `POST /v1/buitenVerhuisAanvraag`| Reports a move to another municipality            |
+| `piv-status`                   | `GET /v1/status`                | Checks whether the endpoint is reachable          |
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-|           |      |          |             |
+The request payloads are configured field by field, so each value can be filled from a process
+variable or the case document (`pv:` / `doc:`). Values nested inside the list properties
+(`aanvraaggegevens`, `meeverhuizerBsns`, `buitengemeentelijkeMeeverhuizers`) are static configuration
+and are not placeholder-resolved.
+
+`piv-status` stores the reported `application` and `version` as a map in the process variable named by
+its optional `resultProcessVariable` property, which defaults to `pivAdapterStatus`.
 
 ## Usage
 

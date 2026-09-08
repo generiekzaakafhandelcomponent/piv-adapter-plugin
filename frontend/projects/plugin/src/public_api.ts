@@ -15,11 +15,11 @@
  */
 
 /*
- * Public API Surface of sample-plugin
+ * Public API Surface of piv-adapter-plugin
  */
 
-export * from "./lib/plugins/sample-plugin/models";
-export * from "./lib/plugins/sample-plugin/sample-plugin-module";
-export * from "./lib/plugins/sample-plugin/sample-plugin.specification";
-export * from "./lib/plugins/sample-plugin/components/sample-plugin-configuration/sample-plugin-configuration.component";
-export * from "./lib/plugins/sample-plugin/components/sample-action-configuration/sample-action-configuration.component";
+export * from "./lib/plugins/piv-adapter-plugin/models";
+export * from "./lib/plugins/piv-adapter-plugin/piv-adapter-plugin-module";
+export * from "./lib/plugins/piv-adapter-plugin/piv-adapter-plugin.specification";
+export * from "./lib/plugins/piv-adapter-plugin/components/piv-adapter-plugin-configuration/piv-adapter-plugin-configuration.component";
+export * from "./lib/plugins/piv-adapter-plugin/components/piv-uittreksel-aanvraag-configuration/piv-uittreksel-aanvraag-configuration.component";

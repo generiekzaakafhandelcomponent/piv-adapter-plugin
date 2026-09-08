@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import {PluginConfigurationData} from "@valtimo/plugin";
+package com.ritense.valtimoplugins.pivadapter
 
-interface SamplePluginConfig extends PluginConfigurationData {
-  apiUrl: string;
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+
+@SpringBootApplication
+class TestApplication
+
+fun main(args: Array<String>) {
+    runApplication<TestApplication>(*args)
 }
-
-interface SampleActionConfig {
-  message: string;
-}
-
-export {SamplePluginConfig, SampleActionConfig};

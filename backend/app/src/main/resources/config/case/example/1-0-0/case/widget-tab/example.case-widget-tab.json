@@ -5,7 +5,7 @@
             {
                 "type": "fields",
                 "key": "process-variable-result",
-                "title": "Sample Plugin Result",
+                "title": "PIV Adapter Status",
                 "width": 2,
                 "highContrast": true,
                 "properties": {
@@ -21,18 +21,18 @@
                                 }
                             },
                             {
-                                "key": "message",
-                                "title": "Message",
-                                "value": "doc:/message",
+                                "key": "pivAdapterApplication",
+                                "title": "Application",
+                                "value": "doc:/pivAdapterApplication",
                                 "displayProperties": {
                                     "type": "text",
                                     "hideWhenEmpty": false
                                 }
                             },
                             {
-                                "key": "apiResult",
-                                "title": "API Result",
-                                "value": "doc:/apiResult",
+                                "key": "pivAdapterVersion",
+                                "title": "Version",
+                                "value": "doc:/pivAdapterVersion",
                                 "displayProperties": {
                                     "type": "text",
                                     "hideWhenEmpty": false

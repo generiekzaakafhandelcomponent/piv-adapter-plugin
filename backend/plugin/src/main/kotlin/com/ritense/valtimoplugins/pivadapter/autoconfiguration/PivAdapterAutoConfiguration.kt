@@ -14,30 +14,25 @@
  * limitations under the License.
  */
 
-package com.ritense.valtimoplugins.sampleplugin.autoconfiguration
+package com.ritense.valtimoplugins.pivadapter.autoconfiguration
 
 import com.ritense.plugin.service.PluginService
-import com.ritense.valtimoplugins.sampleplugin.client.SampleClient
-import com.ritense.valtimoplugins.sampleplugin.client.SampleService
-import com.ritense.valtimoplugins.sampleplugin.plugin.SamplePluginFactory
+import com.ritense.valtimoplugins.pivadapter.client.PivAdapterService
+import com.ritense.valtimoplugins.pivadapter.plugin.PivAdapterPluginFactory
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 
 @AutoConfiguration
-class SampleAutoConfiguration {
+class PivAdapterAutoConfiguration {
     @Bean
-    @ConditionalOnMissingBean(SampleClient::class)
-    fun sampleClient(): SampleClient = SampleClient()
+    @ConditionalOnMissingBean(PivAdapterService::class)
+    fun pivAdapterService(): PivAdapterService = PivAdapterService()
 
     @Bean
-    @ConditionalOnMissingBean(SampleService::class)
-    fun sampleService(sampleClient: SampleClient): SampleService = SampleService(sampleClient)
-
-    @Bean
-    @ConditionalOnMissingBean(SamplePluginFactory::class)
-    fun samplePluginFactory(
+    @ConditionalOnMissingBean(PivAdapterPluginFactory::class)
+    fun pivAdapterPluginFactory(
         pluginService: PluginService,
-        sampleService: SampleService,
-    ): SamplePluginFactory = SamplePluginFactory(pluginService, sampleService)
+        pivAdapterService: PivAdapterService,
+    ): PivAdapterPluginFactory = PivAdapterPluginFactory(pluginService, pivAdapterService)
 }

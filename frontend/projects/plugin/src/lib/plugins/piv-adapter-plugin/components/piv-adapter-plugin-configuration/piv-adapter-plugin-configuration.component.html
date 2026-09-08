@@ -29,17 +29,18 @@
     [defaultValue]="obs.prefill?.configurationTitle"
     [required]="true"
     [widthPx]="350"
-    placeholder="Sample Plugin"
+    placeholder="PIV Adapter Plugin"
   >
   </v-input>
   <v-input
-    name="apiUrl"
-    [title]="'apiUrl' | pluginTranslate: pluginId | async"
+    name="pivAdapterBaseUrl"
+    [title]="'pivAdapterBaseUrl' | pluginTranslate: pluginId | async"
     [margin]="true"
     [disabled]="obs.disabled"
-    [defaultValue]="obs.prefill?.apiUrl"
+    [defaultValue]="obs.prefill?.pivAdapterBaseUrl"
     [required]="true"
     [widthPx]="350"
+    placeholder="https://piv.example.nl/esuite/pivadapter"
   >
   </v-input>
 </v-form>

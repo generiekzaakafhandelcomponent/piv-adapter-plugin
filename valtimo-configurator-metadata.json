@@ -1,17 +1,17 @@
 {
-    "name": "sample-plugin",
+    "name": "piv-adapter-plugin",
     "version": 1,
     "backend": [
         {
-            "import": "com.ritense.valtimoplugins:sample-plugin"
+            "import": "com.ritense.valtimoplugins:piv-adapter-plugin"
         }
     ],
     "frontend": {
-        "import": "@valtimo-plugins/sample-plugin",
+        "import": "@valtimo-plugins/piv-adapter-plugin",
         "codeAdditions": [
             {
-                "spec": "samplePluginSpecification",
-                "module": "SamplePluginModule"
+                "spec": "pivAdapterPluginSpecification",
+                "module": "PivAdapterPluginModule"
             }
         ]
     }
