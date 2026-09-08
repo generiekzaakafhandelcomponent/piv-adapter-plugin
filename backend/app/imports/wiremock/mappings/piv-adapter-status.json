@@ -1,0 +1,17 @@
+{
+  "name": "PIV Adapter - GET /v1/status",
+  "request": {
+    "method": "GET",
+    "urlPath": "/esuite/pivadapter/v1/status"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "application": "pivadapter",
+      "version": "1.0.0"
+    }
+  }
+}

@@ -1,0 +1,161 @@
+<!--
+  ~ Copyright 2026 Ritense BV, the Netherlands.
+  ~
+  ~ Licensed under EUPL, Version 1.2 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<p style="margin-bottom: 1.5rem">
+  {{ 'uittrekselAanvraagDescription' | pluginTranslate: pluginId | async }}
+</p>
+
+<v-form
+  (valueChange)="formValueChange($event)"
+  *ngIf="{
+    disabled: disabled$ | async,
+    prefill: prefillConfiguration$ ? (prefillConfiguration$ | async) : null,
+    prefillAanvraaggegevens: prefillAanvraaggegevens$ | async
+  } as obs"
+>
+  <v-input
+    name="zaakId"
+    [title]="'zaakId' | pluginTranslate: pluginId | async"
+    [tooltip]="'zaakIdTooltip' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.zaakId"
+    [disabled]="obs.disabled"
+    [required]="true"
+    [trim]="true"
+    [widthPx]="350"
+  >
+  </v-input>
+  <v-input
+    name="datumAanvraag"
+    [title]="'datumAanvraag' | pluginTranslate: pluginId | async"
+    [tooltip]="'datumAanvraagTooltip' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.datumAanvraag"
+    [disabled]="obs.disabled"
+    [required]="true"
+    [trim]="true"
+    [widthPx]="350"
+    placeholder="2026-09-08"
+  >
+  </v-input>
+  <v-multi-input-form
+    name="aanvraaggegevens"
+    [title]="'aanvraaggegevens' | pluginTranslate: pluginId | async"
+    [tooltip]="'aanvraaggegevensTooltip' | pluginTranslate: pluginId | async"
+    [addRowText]="'addUittreksel' | pluginTranslate: pluginId | async"
+    [formTemplate]="uittrekselForm"
+    [defaultValues]="obs.prefillAanvraaggegevens"
+    [initialAmountOfRows]="0"
+    [minimumAmountOfRows]="1"
+    [maxRows]="99"
+    [margin]="true"
+    [required]="true"
+    [disabled]="obs.disabled"
+  >
+  </v-multi-input-form>
+  <v-input
+    name="emailadres"
+    [title]="'emailadres' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.emailadres"
+    [disabled]="obs.disabled"
+    [required]="true"
+    [trim]="true"
+    [widthPx]="350"
+  >
+  </v-input>
+  <v-input
+    name="telefoonnummerPrive"
+    [title]="'telefoonnummerPrive' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.telefoonnummerPrive"
+    [disabled]="obs.disabled"
+    [required]="true"
+    [trim]="true"
+    [widthPx]="350"
+  >
+  </v-input>
+  <v-input
+    name="telefoonnummerWerk"
+    [title]="'telefoonnummerWerk' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.telefoonnummerWerk"
+    [disabled]="obs.disabled"
+    [trim]="true"
+    [widthPx]="350"
+  >
+  </v-input>
+  <v-input
+    name="telefoonnummerMobiel"
+    [title]="'telefoonnummerMobiel' | pluginTranslate: pluginId | async"
+    [margin]="true"
+    [defaultValue]="obs.prefill?.telefoonnummerMobiel"
+    [disabled]="obs.disabled"
+    [trim]="true"
+    [widthPx]="350"
+  >
+  </v-input>
+</v-form>
+
+<!--
+  The row form is declared outside of the form above on purpose: the multi input form renders it
+  once per row, and nesting it inside the outer v-form would make its inputs part of that form.
+  -->
+<ng-template #uittrekselForm let-uuid="uuid" let-changeFunction="changeFunction" let-prefill="prefill">
+  <ng-container
+    *ngIf="{
+      disabled: disabled$ | async,
+      indicatieGratisItems: indicatieGratisItems$ | async
+    } as obs"
+  >
+    <v-form (valueChange)="changeFunction($event, uuid)">
+      <v-input
+        name="burgerservicenummer"
+        [title]="'burgerservicenummer' | pluginTranslate: pluginId | async"
+        [smallMargin]="true"
+        [defaultValue]="prefill?.burgerservicenummer"
+        [disabled]="obs.disabled"
+        [required]="true"
+        [trim]="true"
+        [widthPx]="350"
+      >
+      </v-input>
+      <v-input
+        name="uittrekselcode"
+        [title]="'uittrekselcode' | pluginTranslate: pluginId | async"
+        [tooltip]="'uittrekselcodeTooltip' | pluginTranslate: pluginId | async"
+        [smallMargin]="true"
+        [defaultValue]="prefill?.uittrekselcode"
+        [disabled]="obs.disabled"
+        [required]="true"
+        [trim]="true"
+        [widthPx]="350"
+      >
+      </v-input>
+      <v-select
+        name="indicatieGratis"
+        [items]="obs.indicatieGratisItems"
+        [title]="'indicatieGratis' | pluginTranslate: pluginId | async"
+        [tooltip]="'indicatieGratisTooltip' | pluginTranslate: pluginId | async"
+        [smallMargin]="true"
+        [defaultSelectionId]="prefill?.indicatieGratis"
+        [disabled]="obs.disabled"
+        [widthInPx]="350"
+      >
+      </v-select>
+    </v-form>
+  </ng-container>
+</ng-template>

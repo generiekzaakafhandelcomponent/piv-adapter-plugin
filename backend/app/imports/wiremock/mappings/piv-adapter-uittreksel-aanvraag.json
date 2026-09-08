@@ -1,0 +1,10 @@
+{
+  "name": "PIV Adapter - POST /v1/uittrekselAanvraag",
+  "request": {
+    "method": "POST",
+    "urlPath": "/esuite/pivadapter/v1/uittrekselAanvraag"
+  },
+  "response": {
+    "status": 204
+  }
+}
