@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ritense.valtimoplugins.sampleplugin
+package com.ritense.valtimoplugins.pivadapter
 
 import org.junit.jupiter.api.Test
 
