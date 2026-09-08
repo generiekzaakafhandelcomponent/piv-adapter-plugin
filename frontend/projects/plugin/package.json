@@ -1,7 +1,7 @@
 {
     "name": "@valtimo-plugins/piv-adapter-plugin",
     "license": "EUPL-1.2",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "scripts": {
         "build": "ng build @valtimo-plugins/piv-adapter-plugin",
         "watch": "ng build @valtimo-plugins/piv-adapter-plugin --watch"
