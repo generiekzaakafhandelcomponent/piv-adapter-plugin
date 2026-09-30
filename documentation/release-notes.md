@@ -2,6 +2,10 @@
 
 Overzicht van wijzigingen per versie van de PIV Adapter plugin.
 
+## 0.0.8
+
+Ondersteuning voor Valtimo 13.48.0.
+
 ## 0.0.1
 
 Eerste opzet
